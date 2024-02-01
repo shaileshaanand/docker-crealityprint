@@ -47,6 +47,12 @@ RUN \
   chmod +x /tmp/prusa.app && \
   ./prusa.app --appimage-extract && \
   mv squashfs-root /opt/prusaslicer && \
+  KLIPPER_ESTIMATOR_VERSION=$(curl -sX GET "https://api.github.com/repos/Annex-Engineering/klipper_estimator/releases/latest" \
+  | awk '/tag_name/{print $4;exit}' FS='[""]') && \
+  echo "**** install klipper_estimator version ${KLIPPER_ESTIMATOR_VERSION} ****" && \
+  curl -o \
+  /usr/bin/klipper_estimator -L "https://github.com/Annex-Engineering/klipper_estimator/releases/download/${KLIPPER_ESTIMATOR_VERSION}/klipper_estimator_linux" && \
+  chmod +x /usr/bin/klipper_estimator && \
   echo "**** cleanup ****" && \
   apt-get autoclean && \
   rm -rf \
