@@ -16,7 +16,7 @@ RUN \
   apt-get update && \
   DEBIAN_FRONTEND=noninteractive \
   apt-get install --no-install-recommends -y \
-  firefox-esr jq && \
+  firefox-esr jq \
   # gstreamer1.0-alsa \
   # gstreamer1.0-gl \
   # gstreamer1.0-gtk3 \
@@ -32,8 +32,8 @@ RUN \
   # libgstreamer1.0 \
   # libgstreamer-plugins-bad1.0 \
   # libgstreamer-plugins-base1.0 \
-  # libwebkit2gtk-4.0-37 \
-  # libwx-perl && \
+  # libwx-perl \
+  libwebkit2gtk-4.1-0 &&\
   echo "**** install prusaslicer from appimage ****" && \
   if [ -z ${PRUSASLICER_VERSION+x} ]; then \
   PRUSASLICER_VERSION=$(curl -sX GET "https://api.github.com/repos/prusa3d/PrusaSlicer/releases/latest" \
@@ -43,7 +43,7 @@ RUN \
   echo "**** install prusaslicer version ${PRUSASLICER_VERSION} ****" && \
   curl -o \
   /tmp/prusa.app -L \
-  $(curl -L "https://api.github.com/repos/prusa3d/PrusaSlicer/releases/tags/${PRUSASLICER_VERSION}" | jq -r '.assets[] | select (.name | test("linux-x64-GTK3-.*\\.AppImage"))|.browser_download_url') && \
+  $(curl -L "https://api.github.com/repos/prusa3d/PrusaSlicer/releases/tags/${PRUSASLICER_VERSION}" | jq -r '.assets[] | select (.name | test("linux-x64-newer-distros-GTK3-.*\\.AppImage"))|.browser_download_url') && \
   chmod +x /tmp/prusa.app && \
   ./prusa.app --appimage-extract && \
   mv squashfs-root /opt/prusaslicer && \
