@@ -11,9 +11,9 @@
         <command>/usr/bin/firefox</command>
       </action>
     </item>
-    <item label="PrusaSlicer" icon="/opt/prusaslicer/PrusaSlicer.png">
+    <item label="CrealityPrint" icon="/opt/CrealityPrint/default.png">
       <action name="Execute">
-        <command>/opt/prusaslicer/AppRun</command>
+        <command>/opt/CrealityPrint/AppRun</command>
       </action>
     </item>
   </menu>
